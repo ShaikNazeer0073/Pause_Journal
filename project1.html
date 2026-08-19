@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pause — A sanctuary for your mental peace</title>
+	<meta name="description"
+		content="A quiet, gentle daily journal created for your mental peace and emotional well-being. Unburden your mind, reflect without judgment, and build a private record of your life.">
+
+	<style>
+		
+		:root {
+			
+			--font-serif: Georgia, 'Times New Roman', Cambria, serif;
+			--font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+			
+			--paper: #fff5f7;
+			--card-bg: #ffffff;
+			--card-alt: #fde8ee;
+			--ink: #2a1c22;
+			--muted: #8c737d;
+			--subtle-border: #f2d6de;
+
+			
+			--rose: #e85d75;
+			--rose-light: #f48094;
+			--rose-dark: #c43b53;
+			--rose-soft: #fce4ec;
+			--rose-glow: rgba(232, 93, 117, 0.22);
+
+			--white: #ffffff;
+			--shadow-sm: 0 4px 14px rgba(42, 28, 34, 0.04);
+			--shadow-md: 0 16px 36px rgba(232, 93, 117, 0.08);
+			--shadow-lg: 0 24px 48px rgba(232, 93, 117, 0.14);
+			--radius-sm: 8px;
+			--radius-md: 16px;
+			--radius-lg: 24px;
+			--transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+			--transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+
+		
+		[data-theme="candlelight"] {
+			--paper: #180c10;
+			--card-bg: #241217;
+			--card-alt: #30181f;
+			--ink: #fce8ee;
+			--muted: #c4a0aa;
+			--subtle-border: #48222c;
+			--rose: #ff7088;
+			--rose-soft: #421a22;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			font-size: 16px;
+		}
+
+		body {
+			background-color: var(--paper);
+			color: var(--ink);
+			font-family: var(--font-sans);
+			line-height: 1.6;
+			-webkit-font-smoothing: antialiased;
+			overflow-x: hidden;
+		}
+
+		button,
+		input,
+		textarea {
+			font-family: inherit;
+			color: inherit;
+		}
+
+		button {
+			cursor: pointer;
+			border: none;
+			background: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			background: rgba(255, 245, 247, 0.88);
+			backdrop-filter: blur(14px);
+			-webkit-backdrop-filter: blur(14px);
+			border-bottom: 1px solid var(--subtle-border);
+		}
+
+		.header-container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 16px 24px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.brand-logo {
+			font-family: var(--font-serif);
+			font-size: 1.8rem;
+			font-weight: 400;
+			letter-spacing: -0.04em;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			user-select: none;
+		}
+
+		.brand-dot {
+			width: 8px;
+			height: 8px;
+			background-color: var(--rose);
+			border-radius: 50%;
+			display: inline-block;
+			box-shadow: 0 0 10px var(--rose-glow);
+			transition: transform 0.3s ease;
+		}
+
+		.brand-logo:hover .brand-dot {
+			transform: scale(1.5);
+		}
+
+		.nav-links {
+			display: flex;
+			align-items: center;
+			gap: 32px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: var(--muted);
+		}
+
+		.nav-links a {
+			position: relative;
+			padding: 4px 0;
+			transition: color var(--transition-fast);
+		}
+
+		.nav-links a:hover {
+			color: var(--ink);
+		}
+
+		.nav-links a::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 0%;
+			height: 2px;
+			background-color: var(--rose);
+			transition: width 0.25s ease;
+		}
+
+		.nav-links a:hover::after {
+			width: 100%;
+		}
+
+		.header-actions {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+
+		.btn-primary {
+			background-color: var(--rose);
+			color: #ffffff;
+			font-size: 0.88rem;
+			font-weight: 700;
+			padding: 10px 22px;
+			border-radius: 30px;
+			transition: all var(--transition-fast);
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			box-shadow: 0 4px 14px var(--rose-glow);
+		}
+
+		.btn-primary:hover {
+			background-color: var(--rose-dark);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 22px rgba(232, 93, 117, 0.35);
+		}
+
+		.btn-secondary {
+			background-color: var(--card-bg);
+			color: var(--ink);
+			border: 1px solid var(--subtle-border);
+			font-size: 0.88rem;
+			font-weight: 600;
+			padding: 10px 22px;
+			border-radius: 30px;
+			transition: all var(--transition-fast);
+			box-shadow: var(--shadow-sm);
+		}
+
+		.btn-secondary:hover {
+			border-color: var(--rose);
+			color: var(--rose);
+			transform: translateY(-2px);
+		}
+
+		.mobile-nav-toggle {
+			display: none;
+			width: 40px;
+			height: 40px;
+			border-radius: 8px;
+			border: 1px solid var(--subtle-border);
+			background: var(--card-bg);
+			align-items: center;
+			justify-content: center;
+			color: var(--ink);
+		}
+
+		.mobile-menu {
+			position: fixed;
+			top: 73px;
+			left: 0;
+			right: 0;
+			background: var(--card-bg);
+			border-bottom: 1px solid var(--subtle-border);
+			padding: 24px;
+			display: flex;
+			flex-direction: column;
+			gap: 18px;
+			transform: translateY(-120%);
+			transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			z-index: 99;
+			box-shadow: var(--shadow-md);
+		}
+
+		.mobile-menu.open {
+			transform: translateY(0);
+		}
+
+		.mobile-menu a {
+			font-size: 1.1rem;
+			font-weight: 500;
+			padding: 8px 0;
+			border-bottom: 1px dashed var(--subtle-border);
+		}
+
+		
+		.hero-section {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 80px 24px 100px;
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 64px;
+			align-items: center;
+			min-height: 80vh;
+		}
+
+		.hero-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background-color: var(--rose-soft);
+			color: var(--rose);
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			padding: 6px 16px;
+			border-radius: 20px;
+			margin-bottom: 24px;
+			border: 1px solid rgba(232, 93, 117, 0.2);
+		}
+
+		.hero-badge-dot {
+			width: 6px;
+			height: 6px;
+			background-color: var(--rose);
+			border-radius: 50%;
+		}
+
+		.hero-title {
+			font-family: var(--font-serif);
+			font-size: clamp(3.4rem, 6.5vw, 5.8rem);
+			font-weight: 400;
+			line-height: 0.96;
+			letter-spacing: -0.04em;
+			margin-bottom: 24px;
+			color: var(--ink);
+		}
+
+		.hero-title em {
+			font-style: italic;
+			color: var(--rose);
+		}
+
+		.hero-description {
+			font-size: 1.15rem;
+			color: var(--muted);
+			max-width: 540px;
+			line-height: 1.65;
+			margin-bottom: 36px;
+		}
+
+		.hero-ctas {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			flex-wrap: wrap;
+		}
+
+		.hero-trust-note {
+			margin-top: 32px;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		.trust-icon {
+			color: var(--rose);
+			display: inline-flex;
+		}
+
+		
+		.hero-preview-wrapper {
+			position: relative;
+		}
+
+		.hero-preview-card {
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-lg);
+			padding: 32px;
+			box-shadow: var(--shadow-lg);
+			transform: rotate(1.5deg);
+			transition: transform 0.4s ease, box-shadow 0.4s ease;
+			position: relative;
+			user-select: none;
+		}
+
+		.hero-preview-card:hover {
+			transform: rotate(0deg) translateY(-4px);
+			box-shadow: 0 30px 60px rgba(232, 93, 117, 0.18);
+		}
+
+		.preview-card-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-bottom: 18px;
+			border-bottom: 1px solid var(--subtle-border);
+			margin-bottom: 24px;
+		}
+
+		.preview-tag {
+			font-size: 0.72rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--rose);
+		}
+
+		.preview-date-text {
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		.preview-stars {
+			display: flex;
+			gap: 4px;
+			color: var(--rose);
+			font-size: 1.4rem;
+			margin-bottom: 16px;
+		}
+
+		.preview-card-title {
+			font-family: var(--font-serif);
+			font-size: 1.8rem;
+			font-weight: 400;
+			margin-bottom: 12px;
+			line-height: 1.2;
+		}
+
+		.preview-card-text {
+			font-size: 0.98rem;
+			color: var(--muted);
+			line-height: 1.6;
+			border-left: 2px solid var(--rose);
+			padding-left: 14px;
+			margin-bottom: 24px;
+			font-style: italic;
+		}
+
+		.preview-card-footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-size: 0.8rem;
+			color: var(--muted);
+			padding-top: 16px;
+			border-top: 1px dashed var(--subtle-border);
+		}
+
+		.preview-status-indicator {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			color: var(--rose);
+			font-weight: 600;
+		}
+
+		.status-dot {
+			width: 7px;
+			height: 7px;
+			background-color: var(--rose);
+			border-radius: 50%;
+			box-shadow: 0 0 8px var(--rose);
+		}
+
+		.hero-decorative-badge {
+			position: absolute;
+			bottom: -20px;
+			left: -20px;
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			padding: 12px 20px;
+			border-radius: var(--radius-md);
+			box-shadow: var(--shadow-md);
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			font-size: 0.85rem;
+			font-weight: 600;
+			animation: floatBadge 4s ease-in-out infinite;
+		}
+
+		@keyframes floatBadge {
+
+			0%,
+			100% {
+				transform: translateY(0);
+			}
+
+			50% {
+				transform: translateY(-8px);
+			}
+		}
+
+		
+		.showcase-section {
+			border-top: 1px solid var(--subtle-border);
+			border-bottom: 1px solid var(--subtle-border);
+			background-color: var(--card-alt);
+			padding: 100px 24px;
+		}
+
+		.showcase-container {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.section-header {
+			text-align: center;
+			max-width: 680px;
+			margin: 0 auto 60px;
+		}
+
+		.section-kicker {
+			color: var(--rose);
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			margin-bottom: 12px;
+		}
+
+		.section-title {
+			font-family: var(--font-serif);
+			font-size: clamp(2.4rem, 4.5vw, 4rem);
+			font-weight: 400;
+			line-height: 1.05;
+			letter-spacing: -0.03em;
+			margin-bottom: 18px;
+		}
+
+		.section-subtitle {
+			font-size: 1.05rem;
+			color: var(--muted);
+			line-height: 1.6;
+		}
+
+		.showcase-tabs {
+			display: flex;
+			justify-content: center;
+			gap: 12px;
+			margin-bottom: 40px;
+			flex-wrap: wrap;
+		}
+
+		.tab-btn {
+			padding: 12px 24px;
+			border-radius: 30px;
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: var(--muted);
+			transition: all var(--transition-fast);
+			box-shadow: var(--shadow-sm);
+		}
+
+		.tab-btn:hover {
+			color: var(--ink);
+			border-color: var(--rose);
+		}
+
+		.tab-btn.active {
+			background-color: var(--rose);
+			color: #ffffff;
+			border-color: var(--rose);
+			font-weight: 700;
+			box-shadow: 0 4px 14px var(--rose-glow);
+		}
+
+		.showcase-stage {
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-lg);
+			padding: 40px;
+			box-shadow: var(--shadow-md);
+			min-height: 400px;
+		}
+
+		.tab-panel {
+			display: none;
+			animation: fadeIn 0.4s ease forwards;
+		}
+
+		.tab-panel.active {
+			display: block;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.panel-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 40px;
+			align-items: center;
+		}
+
+		.panel-text-content h3 {
+			font-family: var(--font-serif);
+			font-size: 2.2rem;
+			font-weight: 400;
+			margin-bottom: 16px;
+			line-height: 1.15;
+		}
+
+		.panel-text-content p {
+			color: var(--muted);
+			font-size: 1rem;
+			line-height: 1.65;
+			margin-bottom: 24px;
+		}
+
+		.feature-check-list {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.feature-check-item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 0.92rem;
+			font-weight: 500;
+		}
+
+		.check-icon {
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: var(--rose-soft);
+			color: var(--rose);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 0.75rem;
+			font-weight: 800;
+		}
+
+		.mood-chart-box {
+			background-color: var(--card-alt);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-md);
+			padding: 24px;
+		}
+
+		.chart-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.chart-title {
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+
+		.chart-bars {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+		}
+
+		.bar-row {
+			display: grid;
+			grid-template-columns: 100px 1fr 45px;
+			align-items: center;
+			gap: 12px;
+			font-size: 0.85rem;
+		}
+
+		.bar-track {
+			height: 10px;
+			background-color: var(--subtle-border);
+			border-radius: 6px;
+			overflow: hidden;
+		}
+
+		.bar-fill {
+			height: 100%;
+			background-color: var(--rose);
+			border-radius: 6px;
+		}
+
+		
+		.journal-section {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 100px 24px;
+		}
+
+		.journal-box {
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-lg);
+			padding: clamp(24px, 5vw, 48px);
+			box-shadow: var(--shadow-md);
+			margin-bottom: 100px;
+		}
+
+		.field-group {
+			margin-bottom: 28px;
+		}
+
+		.field-label {
+			display: block;
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--muted);
+			margin-bottom: 12px;
+		}
+
+		.star-rating-group {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.star-btn-input {
+			font-size: 2.2rem;
+			color: var(--subtle-border);
+			transition: transform 0.15s ease, color 0.15s ease;
+			line-height: 1;
+			min-width: 44px;
+			min-height: 44px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.star-btn-input:hover,
+		.star-btn-input.active {
+			color: var(--rose);
+			transform: scale(1.15);
+		}
+
+		.rating-hint {
+			font-size: 0.85rem;
+			color: var(--muted);
+			margin-left: 12px;
+			font-style: italic;
+		}
+
+		.journal-textarea {
+			width: 100%;
+			min-height: 170px;
+			background-color: var(--paper);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-md);
+			padding: 20px;
+			font-size: 1.1rem;
+			line-height: 1.6;
+			color: var(--ink);
+			outline: none;
+			resize: vertical;
+			transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+		}
+
+		.journal-textarea:focus {
+			border-color: var(--rose);
+			box-shadow: 0 0 0 4px var(--rose-soft);
+		}
+
+		.journal-textarea::placeholder {
+			color: var(--muted);
+			opacity: 0.7;
+		}
+
+		.form-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 24px;
+			flex-wrap: wrap;
+			gap: 16px;
+		}
+
+		.word-counter {
+			font-size: 0.8rem;
+			color: var(--muted);
+		}
+
+		
+		.vault-section-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			margin-bottom: 32px;
+			border-bottom: 1px solid var(--subtle-border);
+			padding-bottom: 20px;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+
+		.vault-controls {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			position: relative;
+			flex-wrap: wrap;
+		}
+
+		.vault-search-input {
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: 30px;
+			padding: 9px 18px;
+			font-size: 0.85rem;
+			color: var(--ink);
+			outline: none;
+			min-width: 220px;
+			transition: border-color 0.2s ease;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.vault-search-input:focus {
+			border-color: var(--rose);
+		}
+
+		.vault-filter-dropdown-wrapper {
+			position: relative;
+		}
+
+		.filter-icon-btn {
+			padding: 9px 18px;
+			border-radius: 30px;
+			border: 1px solid var(--subtle-border);
+			background-color: var(--card-bg);
+			font-size: 0.85rem;
+			font-weight: 600;
+			color: var(--ink);
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			transition: all var(--transition-fast);
+			box-shadow: var(--shadow-sm);
+		}
+
+		.filter-icon-btn:hover,
+		.filter-icon-btn.active {
+			border-color: var(--rose);
+			color: var(--rose);
+			background-color: var(--rose-soft);
+		}
+
+		.filter-dropdown-menu {
+			position: absolute;
+			top: calc(100% + 8px);
+			right: 0;
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-md);
+			padding: 8px;
+			box-shadow: var(--shadow-lg);
+			min-width: 180px;
+			z-index: 100;
+			display: none;
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		.filter-dropdown-menu.show {
+			display: flex;
+			animation: fadeIn 0.2s ease forwards;
+		}
+
+		.dropdown-item {
+			padding: 8px 14px;
+			border-radius: 8px;
+			font-size: 0.85rem;
+			font-weight: 500;
+			color: var(--muted);
+			text-align: left;
+			transition: all 0.15s ease;
+		}
+
+		.dropdown-item:hover,
+		.dropdown-item.selected {
+			background-color: var(--rose-soft);
+			color: var(--rose);
+			font-weight: 600;
+		}
+
+		
+		.vault-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			gap: 20px;
+		}
+
+		.vault-card-box {
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-md);
+			padding: 24px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			transition: all var(--transition-fast);
+			cursor: pointer;
+			user-select: none;
+			min-height: 140px;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.vault-card-box:hover {
+			border-color: var(--rose);
+			transform: translateY(-4px);
+			box-shadow: 0 16px 32px rgba(232, 93, 117, 0.15);
+		}
+
+		.vault-box-date {
+			font-size: 0.82rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--rose);
+			margin-bottom: 6px;
+		}
+
+		.vault-box-stars {
+			color: var(--rose);
+			font-size: 1.2rem;
+			letter-spacing: 2px;
+			margin-bottom: 16px;
+		}
+
+		.vault-box-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 0.78rem;
+			color: var(--muted);
+			padding-top: 12px;
+			border-top: 1px dashed var(--subtle-border);
+		}
+
+		.read-trigger-link {
+			color: var(--rose);
+			font-weight: 700;
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+
+		
+		.reader-modal-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(42, 28, 34, 0.6);
+			backdrop-filter: blur(10px);
+			-webkit-backdrop-filter: blur(10px);
+			z-index: 1000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 24px;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.3s ease;
+		}
+
+		.reader-modal-overlay.open {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.reader-modal-container {
+			background-color: var(--card-bg);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-lg);
+			max-width: 680px;
+			width: 100%;
+			max-height: 85vh;
+			overflow-y: auto;
+			padding: clamp(28px, 5vw, 48px);
+			box-shadow: 0 30px 90px rgba(42, 28, 34, 0.25);
+			position: relative;
+			transform: scale(0.95) translateY(20px);
+			transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+
+		.reader-modal-overlay.open .reader-modal-container {
+			transform: scale(1) translateY(0);
+		}
+
+		.reader-modal-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-bottom: 20px;
+			border-bottom: 1px solid var(--subtle-border);
+			margin-bottom: 24px;
+		}
+
+		.reader-modal-date {
+			font-family: var(--font-serif);
+			font-size: 1.8rem;
+			font-weight: 400;
+			color: var(--ink);
+		}
+
+		.reader-header-actions {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.action-btn-icon {
+			padding: 6px 14px;
+			border-radius: 20px;
+			border: 1px solid var(--subtle-border);
+			background-color: var(--card-alt);
+			font-size: 0.8rem;
+			font-weight: 600;
+			color: var(--muted);
+			transition: all 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+		}
+
+		.action-btn-icon:hover {
+			border-color: var(--rose);
+			color: var(--rose);
+		}
+
+		.reader-close-btn {
+			width: 34px;
+			height: 34px;
+			border-radius: 50%;
+			border: 1px solid var(--subtle-border);
+			background-color: var(--card-alt);
+			color: var(--ink);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.1rem;
+			transition: all 0.2s ease;
+			margin-left: 6px;
+		}
+
+		.reader-close-btn:hover {
+			border-color: var(--rose);
+			color: var(--rose);
+		}
+
+		.reader-meta-bar {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			margin-bottom: 24px;
+			font-size: 0.88rem;
+			color: var(--muted);
+		}
+
+		.reader-stars-large {
+			color: var(--rose);
+			font-size: 1.3rem;
+			letter-spacing: 2px;
+		}
+
+		.reader-body-content {
+			font-size: 1.18rem;
+			line-height: 1.75;
+			color: var(--ink);
+			font-family: var(--font-sans);
+			white-space: pre-wrap;
+			border-left: 3px solid var(--rose);
+			padding-left: 20px;
+			margin-bottom: 36px;
+		}
+
+		
+		.modal-edit-box {
+			display: none;
+			margin-bottom: 28px;
+		}
+
+		.modal-edit-textarea {
+			width: 100%;
+			min-height: 180px;
+			background-color: var(--paper);
+			border: 1px solid var(--subtle-border);
+			border-radius: var(--radius-md);
+			padding: 16px;
+			font-size: 1.1rem;
+			line-height: 1.6;
+			color: var(--ink);
+			outline: none;
+			resize: vertical;
+			margin-top: 12px;
+		}
+
+		.modal-edit-textarea:focus {
+			border-color: var(--rose);
+		}
+
+		.modal-edit-actions {
+			display: flex;
+			gap: 12px;
+			justify-content: flex-end;
+			margin-top: 16px;
+		}
+
+		.reader-modal-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-top: 20px;
+			border-top: 1px dashed var(--subtle-border);
+		}
+
+		.reader-nav-btn {
+			font-size: 0.88rem;
+			font-weight: 600;
+			color: var(--muted);
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			transition: color 0.2s ease;
+		}
+
+		.reader-nav-btn:hover {
+			color: var(--rose);
+		}
+
+		
+		.philosophy-section {
+			background-color: var(--card-alt);
+			color: var(--ink);
+			padding: 100px 24px;
+			text-align: center;
+			border-top: 1px solid var(--subtle-border);
+		}
+
+		.philosophy-container {
+			max-width: 900px;
+			margin: 0 auto;
+		}
+
+		.philosophy-quote {
+			font-family: var(--font-serif);
+			font-size: clamp(2.2rem, 5vw, 3.8rem);
+			font-weight: 400;
+			line-height: 1.1;
+			letter-spacing: -0.03em;
+			margin-bottom: 48px;
+		}
+
+		.principles-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 32px;
+			text-align: left;
+		}
+
+		.principle-card {
+			background-color: var(--card-bg);
+			border-radius: var(--radius-md);
+			padding: 28px;
+			box-shadow: var(--shadow-sm);
+			border: 1px solid var(--subtle-border);
+		}
+
+		.principle-num {
+			font-size: 0.75rem;
+			font-weight: 800;
+			color: var(--rose);
+			letter-spacing: 0.1em;
+			margin-bottom: 12px;
+		}
+
+		.principle-title {
+			font-size: 1.1rem;
+			font-weight: 700;
+			margin-bottom: 8px;
+		}
+
+		.principle-desc {
+			font-size: 0.88rem;
+			color: var(--muted);
+			line-height: 1.55;
+		}
+
+		.site-footer {
+			border-top: 1px solid var(--subtle-border);
+			padding: 40px 24px;
+			background-color: var(--paper);
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		.footer-container {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 16px;
+		}
+
+		.footer-brand-text {
+			font-family: var(--font-serif);
+			font-size: 1.4rem;
+			color: var(--ink);
+		}
+
+		
+		.toast-notification {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background-color: var(--rose);
+			color: #ffffff;
+			padding: 14px 24px;
+			border-radius: 30px;
+			font-size: 0.88rem;
+			font-weight: 700;
+			box-shadow: 0 8px 24px var(--rose-glow);
+			transform: translateY(120px);
+			opacity: 0;
+			transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			z-index: 2000;
+		}
+
+		.toast-notification.show {
+			transform: translateY(0);
+			opacity: 1;
+		}
+
+		.easter-egg-banner {
+			display: none;
+			background: linear-gradient(90deg, #e85d75, #f48094);
+			color: #ffffff;
+			text-align: center;
+			padding: 10px;
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+		}
+
+		@media (max-width: 960px) {
+			.hero-section {
+				grid-template-columns: 1fr;
+				padding-top: 40px;
+				gap: 48px;
+			}
+
+			.hero-preview-card {
+				transform: rotate(0deg);
+			}
+
+			.panel-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.principles-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.nav-links {
+				display: none;
+			}
+
+			.mobile-nav-toggle {
+				display: flex;
+			}
+
+			.hero-title {
+				font-size: clamp(2.8rem, 12vw, 4rem);
+			}
+
+			.showcase-stage {
+				padding: 24px;
+			}
+		}
+
+		@media (max-width: 390px) {
+			.header-container {
+				padding: 12px 16px;
+			}
+
+			.hero-section {
+				padding: 32px 16px 60px;
+			}
+
+			.journal-box {
+				padding: 20px 16px;
+			}
+
+			.hero-ctas {
+				flex-direction: column;
+				width: 100%;
+			}
+
+			.hero-ctas .btn-primary,
+			.hero-ctas .btn-secondary {
+				width: 100%;
+				justify-content: center;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	
+	<div class="easter-egg-banner" id="easter-banner">
+		🕯️ Secret Candlelight Mode Active — "Late Night Thoughts Unlocked"
+	</div>
+
+	
+	<header class="site-header">
+		<div class="header-container">
+			<a href="#top" class="brand-logo" id="logo-btn" aria-label="Pause Homepage">
+				Pause <span class="brand-dot"></span>
+			</a>
+
+			<nav class="nav-links" aria-label="Primary Navigation">
+				<a href="#showcase">Showcase</a>
+				<a href="#today">Today</a>
+				<a href="#vault">Memory Vault</a>
+				<a href="#about">Philosophy</a>
+			</nav>
+
+			<div class="header-actions">
+				<a href="#today" class="btn-primary">Journal Now</a>
+				<button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	
+	<div class="mobile-menu" id="mobile-menu">
+		<a href="#showcase" class="mobile-link">Showcase</a>
+		<a href="#today" class="mobile-link">Today's Page</a>
+		<a href="#vault" class="mobile-link">Memory Vault</a>
+		<a href="#about" class="mobile-link">Philosophy</a>
+	</div>
+
+	<main id="top">
+		
+		<section class="hero-section" aria-labelledby="hero-title">
+			<div class="hero-content-col">
+				<div class="hero-badge">
+					<span class="hero-badge-dot"></span> CRAFTED FOR YOUR MENTAL PEACE & CALM
+				</div>
+
+				<h1 class="hero-title" id="hero-title">
+					A quiet sanctuary for your <em>mind and heart.</em>
+				</h1>
+
+				<p class="hero-description">
+					In a world filled with constant noise, artificial urgency, and overwhelm, Pause gives your daily
+					thoughts a gentle place to land. No streak timers, no judgment, no public feed—just a quiet space
+					dedicated to your peace of mind.
+				</p>
+
+				<div class="hero-ctas">
+					<a href="#today" class="btn-primary">Begin your peaceful entry</a>
+					<a href="#showcase" class="btn-secondary">Discover why peace matters</a>
+				</div>
+
+				<div class="hero-trust-note">
+					<span class="trust-icon">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+							<path
+								d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+						</svg>
+					</span>
+					<span>💖 Dedicated to your daily mental well-being</span>
+				</div>
+			</div>
+
+			
+			<div class="hero-preview-wrapper">
+				<div class="hero-preview-card">
+					<div class="preview-card-header">
+						<span class="preview-tag">Mental Peace Preview</span>
+						<span class="preview-date-text">Wednesday, Aug 19</span>
+					</div>
+
+					<div class="preview-stars">★★★★★</div>
+					<h2 class="preview-card-title">How does your heart feel?</h2>
+
+					<p class="preview-card-text">
+						"I finished the project quicker than expected. I took a slow walk this evening as the air
+						cooled down, and I feel calm and clear-headed tonight."
+					</p>
+
+					<div class="preview-card-footer">
+						<div class="preview-status-indicator">
+							<span class="status-dot"></span> Saved to your private sanctuary
+						</div>
+						<span>33 words</span>
+					</div>
+				</div>
+
+				<div class="hero-decorative-badge">
+					<span>🌸</span>
+					<div>
+						<div style="font-size: 0.75rem; color: var(--muted);">Mental Peace First</div>
+						<div>A gentle ritual for your heart</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		
+		<section class="showcase-section" id="showcase" aria-labelledby="showcase-title">
+			<div class="showcase-container">
+				<div class="section-header">
+					<p class="section-kicker">Care & Mental Peace</p>
+					<h2 class="section-title" id="showcase-title">Built around your mental peace, not metrics.</h2>
+					<p class="section-subtitle">
+						Most apps trick your brain into anxiety with red notification badges, artificial urgency, and
+						streak timers. Pause is built to slow down your heart rate and bring quiet clarity to your
+						life.
+					</p>
+				</div>
+
+				
+				<div class="showcase-tabs" role="tablist">
+					<button class="tab-btn active" data-tab="tab-1" role="tab">1. Gentle Daily Reflection</button>
+					<button class="tab-btn" data-tab="tab-2" role="tab">2. Emotional Harmony</button>
+					<button class="tab-btn" data-tab="tab-3" role="tab">3. Memory Sanctuary</button>
+				</div>
+
+				
+				<div class="showcase-stage">
+
+					
+					<div class="tab-panel active" id="tab-1" role="tabpanel">
+						<div class="panel-grid">
+							<div class="panel-text-content">
+								<h3>Unburden your mind in 60 seconds.</h3>
+								<p>
+									Rate your day from 1 to 5 stars and write whatever your heart needs to release. No
+									forced tags or artificial sentiment boxes—just your own honest words.
+								</p>
+								<ul class="feature-check-list">
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>Gentle star rating to honor how today felt</span>
+									</li>
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>100% private & local — zero ads or behavioral tracking</span>
+									</li>
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>Zero pressure or minimum word counts</span>
+									</li>
+								</ul>
+							</div>
+
+							<div
+								style="background-color: var(--card-alt); border: 1px solid var(--subtle-border); padding: 28px; border-radius: var(--radius-md);">
+								<div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+									<span style="color: var(--rose); font-weight: 700; font-size: 0.8rem;">PEACEFUL
+										REFLECTION</span>
+									<span style="color: var(--rose);">★★★★☆</span>
+								</div>
+								<p
+									style="font-style: italic; color: var(--muted); font-size: 0.98rem; line-height: 1.6;">
+									"Cooked dinner at home instead of ordering out. Read twenty pages before sleeping.
+									Taking care of myself feels good."
+								</p>
+							</div>
+						</div>
+					</div>
+
+					
+					<div class="tab-panel" id="tab-2" role="tabpanel">
+						<div class="panel-grid">
+							<div class="panel-text-content">
+								<h3>Understand your life's peaceful rhythms.</h3>
+								<p>
+									Notice your monthly reflection patterns over time without anxiety. See what days
+									brought peace and fulfillment without complex spreadsheets or diagnostic labels.
+								</p>
+								<ul class="feature-check-list">
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>Gentle reflection distribution tracking</span>
+									</li>
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>Zero streak counters designed to trigger guilt</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="mood-chart-box">
+								<div class="chart-header">
+									<span class="chart-title">Last 30 Days Reflection Rhythm</span>
+									<span style="font-size: 0.8rem; color: var(--muted);">24 Entries</span>
+								</div>
+								<div class="chart-bars">
+									<div class="bar-row">
+										<span>5 Stars (Peaceful)</span>
+										<div class="bar-track">
+											<div class="bar-fill" style="width: 40%;"></div>
+										</div>
+										<span style="font-weight: 600;">40%</span>
+									</div>
+									<div class="bar-row">
+										<span>4 Stars (Good)</span>
+										<div class="bar-track">
+											<div class="bar-fill" style="width: 35%;"></div>
+										</div>
+										<span style="font-weight: 600;">35%</span>
+									</div>
+									<div class="bar-row">
+										<span>3 Stars (Okay)</span>
+										<div class="bar-track">
+											<div class="bar-fill"
+												style="width: 15%; background-color: var(--rose-light);"></div>
+										</div>
+										<span style="font-weight: 600;">15%</span>
+									</div>
+									<div class="bar-row">
+										<span>1-2 Stars (Tough)</span>
+										<div class="bar-track">
+											<div class="bar-fill" style="width: 10%; background-color: var(--muted);">
+											</div>
+										</div>
+										<span style="font-weight: 600;">10%</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+					<div class="tab-panel" id="tab-3" role="tabpanel">
+						<div class="panel-grid">
+							<div class="panel-text-content">
+								<h3>Revisit past days with warmth and care.</h3>
+								<p>
+									Past entries are stored safely in your Memory Sanctuary. Click any date box to open
+									a quiet, book-style reading view designed for self-compassion.
+								</p>
+								<ul class="feature-check-list">
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>Distraction-free modal reader with Edit capabilities</span>
+									</li>
+									<li class="feature-check-item">
+										<span class="check-icon">✓</span>
+										<span>Filter menu & search bar to recall gentle memories</span>
+									</li>
+								</ul>
+							</div>
+
+							<div
+								style="background-color: var(--card-alt); border: 2px dashed var(--rose); padding: 24px; border-radius: var(--radius-md); text-align: center;">
+								<span style="font-size: 2rem;">📖</span>
+								<h4 style="margin: 10px 0 6px; color: var(--rose);">Your Reading Sanctuary</h4>
+								<p style="font-size: 0.88rem; color: var(--muted);">Click any date box in the Memory
+									Vault to open your full journal entry.</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		
+		<section class="journal-section" id="today" aria-labelledby="today-heading">
+			<div class="section-header" style="text-align: left; max-width: none; margin-bottom: 32px;">
+				<p class="section-kicker">YOUR SANCTUARY TODAY</p>
+				<div
+					style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+					<h2 class="section-title" id="today-heading" style="margin-bottom: 0;">How does your heart feel
+						today?</h2>
+					<span style="font-size: 0.95rem; color: var(--muted); font-weight: 500;">
+						Wednesday, August 19, 2026
+					</span>
+				</div>
+			</div>
+
+			<div class="journal-box">
+				<form id="journal-form">
+					
+					<div class="field-group">
+						<label class="field-label">How was today overall?</label>
+						<div class="star-rating-group" role="radiogroup" aria-label="Rate your day from 1 to 5 stars">
+							<button type="button" class="star-btn-input" data-rating="1" aria-label="1 star">★</button>
+							<button type="button" class="star-btn-input" data-rating="2" aria-label="2 stars">★</button>
+							<button type="button" class="star-btn-input" data-rating="3" aria-label="3 stars">★</button>
+							<button type="button" class="star-btn-input" data-rating="4" aria-label="4 stars">★</button>
+							<button type="button" class="star-btn-input" data-rating="5" aria-label="5 stars">★</button>
+							<span class="rating-hint" id="rating-hint">Select a rating</span>
+						</div>
+					</div>
+
+					
+					<div class="field-group">
+						<label class="field-label" for="entry-text">Unburden Your Mind</label>
+						<textarea id="entry-text" class="journal-textarea"
+							placeholder="Unburden your mind here. Write what made you smile today, what felt heavy, or what you want to let go of tonight..."
+							required></textarea>
+					</div>
+
+					<div class="form-footer">
+						<span class="word-counter" id="word-count-display">0 words</span>
+						<button type="submit" class="btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+
+			
+			<div id="vault" aria-labelledby="vault-heading">
+				<div class="vault-section-header">
+					<div>
+						<p class="section-kicker">MEMORY SANCTUARY</p>
+						<h2 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400;"
+							id="vault-heading">Your journey toward mental peace.</h2>
+					</div>
+
+					<div class="vault-controls">
+						<input type="text" id="vault-search" class="vault-search-input"
+							placeholder="Search your quiet memories & thoughts...">
+
+						
+						<div class="vault-filter-dropdown-wrapper">
+							<button type="button" class="filter-icon-btn" id="filter-dropdown-btn">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+									stroke-width="2.2">
+									<path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+								</svg>
+								<span id="filter-btn-label">Filter</span> ▾
+							</button>
+
+							<div class="filter-dropdown-menu" id="filter-dropdown-menu">
+								<button type="button" class="dropdown-item selected" data-filter="all">All
+									Entries</button>
+								<button type="button" class="dropdown-item" data-filter="5">5 ★ Wonderful Days</button>
+								<button type="button" class="dropdown-item" data-filter="4">4 ★ Good Days</button>
+								<button type="button" class="dropdown-item" data-filter="3">3 ★ Average Days</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+				<div class="vault-grid" id="vault-grid-list">
+					<article class="vault-card-box" data-rating="4" data-index="0">
+						<div>
+							<div class="vault-box-date">August 18, 2026</div>
+							<div class="vault-box-stars">★★★★☆</div>
+						</div>
+						<div class="vault-box-footer">
+							<span class="box-word-count">26 words</span>
+							<span class="read-trigger-link">Open entry 📖</span>
+						</div>
+					</article>
+
+					<article class="vault-card-box" data-rating="5" data-index="1">
+						<div>
+							<div class="vault-box-date">August 17, 2026</div>
+							<div class="vault-box-stars">★★★★★</div>
+						</div>
+						<div class="vault-box-footer">
+							<span class="box-word-count">20 words</span>
+							<span class="read-trigger-link">Open entry 📖</span>
+						</div>
+					</article>
+
+					<article class="vault-card-box" data-rating="3" data-index="2">
+						<div>
+							<div class="vault-box-date">August 16, 2026</div>
+							<div class="vault-box-stars">★★★☆☆</div>
+						</div>
+						<div class="vault-box-footer">
+							<span class="box-word-count">22 words</span>
+							<span class="read-trigger-link">Open entry 📖</span>
+						</div>
+					</article>
+				</div>
+			</div>
+
+		</section>
+
+		
+		<section class="philosophy-section" id="about">
+			<div class="philosophy-container">
+				<p class="section-kicker">OUR CORE PROMISE TO YOU</p>
+				<h2 class="philosophy-quote">
+					"Your mental peace is not something to sacrifice.<br>It is the foundation of your life."
+				</h2>
+
+				<div class="principles-grid">
+					<div class="principle-card">
+						<div class="principle-num">01</div>
+						<h3 class="principle-title">Protected Mental Peace</h3>
+						<p class="principle-desc">We refuse to use streak counters or push notifications designed to
+							trigger guilt. Your journal should feel like a warm hug, not another item on your to-do
+							list.</p>
+					</div>
+
+					<div class="principle-card">
+						<div class="principle-num">02</div>
+						<h3 class="principle-title">Sanctuary of Privacy</h3>
+						<p class="principle-desc">Your deepest thoughts belong solely to you. Pause works entirely on
+							your local device—no data harvesting, no tracking, and no monetization of your emotions.</p>
+					</div>
+
+					<div class="principle-card">
+						<div class="principle-num">03</div>
+						<h3 class="principle-title">Gentle Self-Compassion</h3>
+						<p class="principle-desc">Some days are full of joy; others are heavy and exhausting. Pause
+							honors every day equally without judgment, giving your heart a quiet place to rest.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	
+	<div class="reader-modal-overlay" id="reader-modal">
+		<div class="reader-modal-container">
+			<div class="reader-modal-header">
+				<h3 class="reader-modal-date" id="modal-date">August 18, 2026</h3>
+
+				<div class="reader-header-actions">
+					<button class="action-btn-icon" id="edit-entry-btn" title="Edit this page">
+						✏️ Edit
+					</button>
+					<button class="reader-close-btn" id="close-modal-btn" aria-label="Close Reader">✕</button>
+				</div>
+			</div>
+
+			
+			<div class="reader-meta-bar" id="modal-view-meta">
+				<span class="reader-stars-large" id="modal-stars">★★★★☆</span>
+				<span id="modal-rating-text">Good Day</span> •
+				<span id="modal-word-count">26 words</span>
+			</div>
+
+			
+			<div class="reader-body-content" id="modal-body">
+				Finally made headway on the project design. Took a late afternoon walk around the block as the sunset
+				turned the sky soft orange.
+			</div>
+
+			
+			<div class="modal-edit-box" id="modal-edit-box">
+				<label class="field-label">Update Day Rating</label>
+				<div class="star-rating-group" id="edit-modal-stars-group">
+					<button type="button" class="star-btn-input modal-star-edit" data-rating="1">★</button>
+					<button type="button" class="star-btn-input modal-star-edit" data-rating="2">★</button>
+					<button type="button" class="star-btn-input modal-star-edit" data-rating="3">★</button>
+					<button type="button" class="star-btn-input modal-star-edit" data-rating="4">★</button>
+					<button type="button" class="star-btn-input modal-star-edit" data-rating="5">★</button>
+				</div>
+				<textarea class="modal-edit-textarea" id="modal-edit-textarea"></textarea>
+
+				<div class="modal-edit-actions">
+					<button class="btn-secondary" id="cancel-edit-btn">Cancel</button>
+					<button class="btn-primary" id="save-edit-btn">Save Changes</button>
+				</div>
+			</div>
+
+			<div class="reader-modal-footer">
+				<button class="reader-nav-btn" id="prev-entry-btn">← Previous Entry</button>
+				<button class="reader-nav-btn" id="next-entry-btn">Next Entry →</button>
+			</div>
+		</div>
+	</div>
+
+	
+	<footer class="site-footer">
+		<div class="footer-container">
+			<div>
+				<span class="footer-brand-text">Pause</span>
+				<span style="margin-left: 12px;"> Dedicated to your mental peace, daily calm, and
+					self-compassion.</span>
+			</div>
+			<div>
+				<span>© 2026 Pause Journal</span> •
+				<a href="#top" style="text-decoration: underline; margin-left: 6px;">Back to top ↑</a>
+			</div>
+		</div>
+	</footer>
+
+	
+	<div class="toast-notification" id="toast">
+		<span id="toast-message">Saved to your peaceful journal record.</span>
+	</div>
+
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+
+			
+			const mobileToggle = document.getElementById('mobile-toggle');
+			const mobileMenu = document.getElementById('mobile-menu');
+			mobileToggle.addEventListener('click', () => {
+				mobileMenu.classList.toggle('open');
+			});
+			document.querySelectorAll('.mobile-link').forEach(link => {
+				link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+			});
+
+			
+			const tabBtns = document.querySelectorAll('.tab-btn');
+			const tabPanels = document.querySelectorAll('.tab-panel');
+
+			tabBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					const targetTab = btn.dataset.tab;
+					tabBtns.forEach(b => b.classList.remove('active'));
+					tabPanels.forEach(p => p.classList.remove('active'));
+
+					btn.classList.add('active');
+					document.getElementById(targetTab).classList.add('active');
+				});
+			});
+
+			
+			const starBtns = document.querySelectorAll('.star-btn-input:not(.modal-star-edit)');
+			const ratingHint = document.getElementById('rating-hint');
+			let selectedRating = 0;
+
+			const ratingLabels = {
+				1: "1 Star - Tough day",
+				2: "2 Stars - Uneasy day",
+				3: "3 Stars - Average day",
+				4: "4 Stars - Good day",
+				5: "5 Stars - Peaceful day"
+			};
+
+			starBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					selectedRating = parseInt(btn.dataset.rating, 10);
+					starBtns.forEach((s, idx) => {
+						s.classList.toggle('active', idx < selectedRating);
+					});
+					ratingHint.textContent = ratingLabels[selectedRating];
+				});
+			});
+
+			const entryTextarea = document.getElementById('entry-text');
+			const wordCountDisplay = document.getElementById('word-count-display');
+
+			entryTextarea.addEventListener('input', () => {
+				const words = entryTextarea.value.trim().split(/\s+/).filter(w => w.length > 0);
+				wordCountDisplay.textContent = `${words.length} words`;
+			});
+			const entriesDatabase = [
+				{
+					date: "August 18, 2026",
+					stars: 4,
+					ratingText: "Good Day",
+					text: "Finally made headway on the project design. Took a late afternoon walk around the block as the sunset turned the sky soft orange."
+				},
+				{
+					date: "August 17, 2026",
+					stars: 5,
+					ratingText: "Peaceful Day",
+					text: "Had a wonderfully unhurried Sunday. Long dinner with family, fresh fruit, and zero screens after 9 PM."
+				},
+				{
+					date: "August 16, 2026",
+					stars: 3,
+					ratingText: "Average Day",
+					text: "Felt sluggish and unproductive during the afternoon. Reminded myself that not every day has to be a peak performance."
+				}
+			];
+
+			const journalForm = document.getElementById('journal-form');
+			const vaultGridList = document.getElementById('vault-grid-list');
+
+			journalForm.addEventListener('submit', (e) => {
+				e.preventDefault();
+				const text = entryTextarea.value.trim();
+
+				if (!selectedRating) {
+					showToast('Please select how today felt first.');
+					return;
+				}
+				if (!text) {
+					showToast('Please write a few words to unburden your mind.');
+					return;
+				}
+
+				const words = text.split(/\s+/).filter(w => w.length > 0).length;
+
+				const newEntryObj = {
+					date: "Today, Aug 19, 2026",
+					stars: selectedRating,
+					ratingText: ratingLabels[selectedRating].split(/[-—]/)[1].trim(),
+					text: text
+				};
+				entriesDatabase.unshift(newEntryObj);
+
+				const card = document.createElement('article');
+				card.className = 'vault-card-box';
+				card.dataset.rating = selectedRating;
+				card.dataset.index = 0;
+
+				document.querySelectorAll('.vault-card-box').forEach(c => {
+					c.dataset.index = parseInt(c.dataset.index, 10) + 1;
+				});
+
+				const starsStr = '★'.repeat(selectedRating) + '☆'.repeat(5 - selectedRating);
+
+				card.innerHTML = `
+					<div>
+						<div class="vault-box-date">Today, Aug 19, 2026</div>
+						<div class="vault-box-stars">${starsStr}</div>
+					</div>
+					<div class="vault-box-footer">
+						<span class="box-word-count">${words} words</span>
+						<span class="read-trigger-link">Open entry 📖</span>
+					</div>
+				`;
+
+				vaultGridList.prepend(card);
+				attachCardClick(card);
+
+				showToast('Saved to your Memory Sanctuary.');
+
+				entryTextarea.value = '';
+				wordCountDisplay.textContent = '0 words';
+				selectedRating = 0;
+				starBtns.forEach(s => s.classList.remove('active'));
+				ratingHint.textContent = 'Select a rating';
+			});
+
+			
+			const readerModal = document.getElementById('reader-modal');
+			const closeModalBtn = document.getElementById('close-modal-btn');
+			const modalDate = document.getElementById('modal-date');
+			const modalStars = document.getElementById('modal-stars');
+			const modalRatingText = document.getElementById('modal-rating-text');
+			const modalWordCount = document.getElementById('modal-word-count');
+			const modalBody = document.getElementById('modal-body');
+			const prevBtn = document.getElementById('prev-entry-btn');
+			const nextBtn = document.getElementById('next-entry-btn');
+			const editBtn = document.getElementById('edit-entry-btn');
+			const modalEditBox = document.getElementById('modal-edit-box');
+			const modalEditTextarea = document.getElementById('modal-edit-textarea');
+			const saveEditBtn = document.getElementById('save-edit-btn');
+			const cancelEditBtn = document.getElementById('cancel-edit-btn');
+			const modalStarEdits = document.querySelectorAll('.modal-star-edit');
+
+			let activeIndex = 0;
+			let editRating = 0;
+
+			function openReader(index) {
+				if (index < 0 || index >= entriesDatabase.length) return;
+				activeIndex = index;
+				const entry = entriesDatabase[activeIndex];
+
+				modalDate.textContent = entry.date;
+				modalStars.textContent = '★'.repeat(entry.stars) + '☆'.repeat(5 - entry.stars);
+				modalRatingText.textContent = entry.ratingText;
+
+				const words = entry.text.trim().split(/\s+/).filter(w => w).length;
+				modalWordCount.textContent = `${words} words`;
+				modalBody.textContent = entry.text;
+				closeEditMode();
+
+				readerModal.classList.add('open');
+			}
+
+			function closeReader() {
+				readerModal.classList.remove('open');
+				closeEditMode();
+			}
+
+			function openEditMode() {
+				const entry = entriesDatabase[activeIndex];
+				editRating = entry.stars;
+				modalEditTextarea.value = entry.text;
+
+				modalStarEdits.forEach((s, idx) => {
+					s.classList.toggle('active', idx < editRating);
+				});
+
+				modalBody.style.display = 'none';
+				modalEditBox.style.display = 'block';
+			}
+
+			function closeEditMode() {
+				modalBody.style.display = 'block';
+				modalEditBox.style.display = 'none';
+			}
+
+			modalStarEdits.forEach(btn => {
+				btn.addEventListener('click', () => {
+					editRating = parseInt(btn.dataset.rating, 10);
+					modalStarEdits.forEach((s, idx) => {
+						s.classList.toggle('active', idx < editRating);
+					});
+				});
+			});
+
+			editBtn.addEventListener('click', openEditMode);
+			cancelEditBtn.addEventListener('click', closeEditMode);
+			saveEditBtn.addEventListener('click', () => {
+				const newText = modalEditTextarea.value.trim();
+				if (!newText) {
+					showToast('Text cannot be empty.');
+					return;
+				}
+				if (!editRating) editRating = 4;
+				const entry = entriesDatabase[activeIndex];
+				entry.text = newText;
+				entry.stars = editRating;
+				entry.ratingText = ratingLabels[editRating].split(/[-—]/)[1].trim();
+				modalStars.textContent = '★'.repeat(entry.stars) + '☆'.repeat(5 - entry.stars);
+				modalRatingText.textContent = entry.ratingText;
+				const words = newText.split(/\s+/).filter(w => w).length;
+				modalWordCount.textContent = `${words} words`;
+				modalBody.textContent = newText;
+				const cards = document.querySelectorAll('.vault-card-box');
+				cards.forEach(card => {
+					if (parseInt(card.dataset.index, 10) === activeIndex) {
+						card.dataset.rating = editRating;
+						card.querySelector('.vault-box-stars').textContent = '★'.repeat(editRating) + '☆'.repeat(5 - editRating);
+						card.querySelector('.box-word-count').textContent = `${words} words`;
+					}
+				});
+
+				closeEditMode();
+				showToast('Journal page updated successfully.');
+			});
+
+			function attachCardClick(card) {
+				card.addEventListener('click', () => {
+					const idx = parseInt(card.dataset.index, 10);
+					openReader(idx);
+				});
+			}
+
+			document.querySelectorAll('.vault-card-box').forEach(attachCardClick);
+
+			closeModalBtn.addEventListener('click', closeReader);
+
+			readerModal.addEventListener('click', (e) => {
+				if (e.target === readerModal) closeReader();
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') closeReader();
+				if (readerModal.classList.contains('open') && modalEditBox.style.display !== 'block') {
+					if (e.key === 'ArrowRight' && activeIndex > 0) openReader(activeIndex - 1);
+					if (e.key === 'ArrowLeft' && activeIndex < entriesDatabase.length - 1) openReader(activeIndex + 1);
+				}
+			});
+
+			prevBtn.addEventListener('click', () => {
+				if (activeIndex < entriesDatabase.length - 1) openReader(activeIndex + 1);
+			});
+
+			nextBtn.addEventListener('click', () => {
+				if (activeIndex > 0) openReader(activeIndex - 1);
+			});
+
+			
+			const filterDropdownBtn = document.getElementById('filter-dropdown-btn');
+			const filterDropdownMenu = document.getElementById('filter-dropdown-menu');
+			const filterBtnLabel = document.getElementById('filter-btn-label');
+			const dropdownItems = document.querySelectorAll('.dropdown-item');
+			const searchInput = document.getElementById('vault-search');
+
+			filterDropdownBtn.addEventListener('click', (e) => {
+				e.stopPropagation();
+				filterDropdownMenu.classList.toggle('show');
+				filterDropdownBtn.classList.toggle('active');
+			});
+
+			document.addEventListener('click', () => {
+				filterDropdownMenu.classList.remove('show');
+				filterDropdownBtn.classList.remove('active');
+			});
+
+			dropdownItems.forEach(item => {
+				item.addEventListener('click', (e) => {
+					e.stopPropagation();
+					dropdownItems.forEach(i => i.classList.remove('selected'));
+					item.classList.add('selected');
+
+					const filter = item.dataset.filter;
+					filterBtnLabel.textContent = filter === 'all' ? 'Filter' : `${filter} ★ Only`;
+					filterDropdownMenu.classList.remove('show');
+					filterDropdownBtn.classList.remove('active');
+
+					applyFilters();
+				});
+			});
+
+			searchInput.addEventListener('input', applyFilters);
+
+			function applyFilters() {
+				const query = searchInput.value.toLowerCase();
+				const selectedItem = document.querySelector('.dropdown-item.selected');
+				const filter = selectedItem ? selectedItem.dataset.filter : 'all';
+
+				document.querySelectorAll('.vault-card-box').forEach(card => {
+					const idx = parseInt(card.dataset.index, 10);
+					const entry = entriesDatabase[idx];
+					const textMatch = !entry || entry.text.toLowerCase().includes(query) || entry.date.toLowerCase().includes(query);
+					const ratingMatch = filter === 'all' || card.dataset.rating === filter;
+
+					if (textMatch && ratingMatch) {
+						card.style.display = 'flex';
+					} else {
+						card.style.display = 'none';
+					}
+				});
+			}
+
+			
+			const toast = document.getElementById('toast');
+			const toastMsg = document.getElementById('toast-message');
+			let toastTimer;
+
+			function showToast(message) {
+				toastMsg.textContent = message;
+				toast.classList.add('show');
+				clearTimeout(toastTimer);
+				toastTimer = setTimeout(() => {
+					toast.classList.remove('show');
+				}, 3200);
+			}
+
+			
+			const logoBtn = document.getElementById('logo-btn');
+			let logoClicks = 0;
+			logoBtn.addEventListener('click', (e) => {
+				logoClicks++;
+				if (logoClicks === 5) {
+					showToast('✨ Secret Found: Pause was built with care for thoughtful minds.');
+					logoClicks = 0;
+				}
+			});
+
+			const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+			let konamiIndex = 0;
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === konamiCode[konamiIndex] || e.key.toLowerCase() === konamiCode[konamiIndex]) {
+					konamiIndex++;
+					if (konamiIndex === konamiCode.length) {
+						document.documentElement.setAttribute('data-theme', 'candlelight');
+						document.getElementById('easter-banner').style.display = 'block';
+						showToast('🕯️ Secret Candlelight Mode Unlocked!');
+						konamiIndex = 0;
+					}
+				} else {
+					konamiIndex = 0;
+				}
+			});
+
+		});
+	</script>
+</body>
+
+</html>
